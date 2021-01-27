@@ -7,8 +7,9 @@ let subtract = document.getElementById("subtract");
 let add = document.getElementById("add");
 let equals = document.getElementById("equals");
 let decimal = document.getElementById("decimal");
-let operators = [divide, multiply, subtract, add, equals];
+let operators = [divide, multiply, subtract, add];
 let expression = "";
+let result = "";
 
 //clear button clears display and expression
 clear.addEventListener("click", () => {
@@ -28,14 +29,6 @@ for (let i = 0; i < btn.length; i++) {
     }
   });
 }
-// event listener for decimal
-decimal.addEventListener("click", () => {
-  console.log(display.innerHTML.charAt(display.innerText.length - 1));
-  if (!display.innerHTML.includes(".")) {
-    display.innerText += ".";
-    expression += ".";
-  }
-});
 
 //operator functionality
 for (let i = 0; i < operators.length; i++) {
@@ -57,12 +50,29 @@ for (let i = 0; i < operators.length; i++) {
         expression = expression + "-";
         display.innerHTML = 0;
         break;
-      case "equals":
-        let result = eval(expression);
-        display.innerHTML = result;
-        expression = result;
       default:
-        console.log(result);
+        console.log("something was missed");
+        break;
+    }
+  });
+
+  // event listener for decimal
+  decimal.addEventListener("click", () => {
+    console.log(display.innerHTML.charAt(display.innerText.length - 1));
+    if (!display.innerHTML.includes(".")) {
+      display.innerText += ".";
+      expression += ".";
     }
   });
 }
+
+//handle equals
+equals.addEventListener("click", () => {
+  result = eval(expression);
+  display.innerHTML = result;
+  expression = result;
+});
+
+document.addEventListener("click", () => {
+  console.log("general", expression);
+});
