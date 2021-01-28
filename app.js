@@ -135,8 +135,14 @@ for (let i = 0; i < operators.length; i++) {
           operatorWasClicked = true;
           break;
         case "add":
-          lastOperatorClicked = "+";
-          operatorWasClicked = true;
+          if (isNumNegative) {
+            display.innerText = "";
+            isNumNegative = false;
+            lastOperatorClicked = "+";
+          } else {
+            lastOperatorClicked = "+";
+            operatorWasClicked = true;
+          }
           break;
         case "subtract":
           if (operatorWasClicked) {
