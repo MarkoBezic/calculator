@@ -25,7 +25,7 @@ clear.addEventListener("click", () => {
   isNumNegative = false;
 });
 
-//when pressing number keys they show up in the display
+//when pressing number keys they show up in the display and concatonates with expression bucket
 for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", () => {
     if (btn[i].innerText >= 0 && btn[i].innerText <= 9) {
@@ -47,6 +47,7 @@ for (let i = 0; i < btn.length; i++) {
           expression = result + lastOperatorClicked + btn[i].innerText;
           display.innerText = btn[i].innerText;
           equalsWasPressed = false;
+          operatorWasClicked = false;
         }
       } else {
         if (isNumNegative) {
@@ -93,32 +94,59 @@ for (let i = 0; i < operators.length; i++) {
     if (equalsWasPressed) {
       switch (operators[i].id) {
         case "divide":
-          expression = result;
-          equalsWasPressed: false;
-          lastOperatorClicked = "/";
-          operatorWasClicked = true;
+          if (isNumNegative) {
+            isNumNegative = false;
+            operatorWasClicked = true;
+            lastOperatorClicked = "/";
+          } else {
+            expression = result;
+            equalsWasPressed: false;
+            lastOperatorClicked = "/";
+            operatorWasClicked = true;
+          }
           break;
         case "multiply":
+          if (isNumNegative) {
+            isNumNegative = false;
+            operatorWasClicked = true;
+            lastOperatorClicked = "+";
+          }
           expression = result;
           equalsWasPressed: false;
           lastOperatorClicked = "*";
           operatorWasClicked = true;
           break;
         case "add":
+          if (isNumNegative) {
+            display.innerText = "";
+            isNumNegative = false;
+            equalsWasPressed = false;
+            lastOperatorClicked = "+";
+          } else {
+            expression = result;
+            equalsWasPressed: false;
+            lastOperatorClicked = "+";
+          }
           expression = result;
           equalsWasPressed: false;
           lastOperatorClicked = "+";
           break;
         case "subtract":
-          if (operatorWasClicked) {
-            isNumNegative = true;
-            display.innerText = "-";
-          } else {
-            expression = result;
-            equalsWasPressed: false;
-            lastOperatorClicked = "-";
+          if (isNumNegative) {
+            expression += ")";
+            isNumNegative = false;
             operatorWasClicked = true;
+          } else {
+            if (operatorWasClicked) {
+              isNumNegative = true;
+              display.innerText = "-";
+            } else {
+              expression = result;
+              equalsWasPressed: false;
+              operatorWasClicked = true;
+            }
           }
+
           break;
         default:
           console.log("something was missed");
@@ -127,12 +155,27 @@ for (let i = 0; i < operators.length; i++) {
     } else {
       switch (operators[i].id) {
         case "divide":
-          lastOperatorClicked = "/";
-          operatorWasClicked = true;
+          if (isNumNegative) {
+            expression += ")";
+            isNumNegative = false;
+            lastOperatorClicked = "/";
+            operatorWasClicked = true;
+          } else {
+            lastOperatorClicked = "/";
+            operatorWasClicked = true;
+          }
+
           break;
         case "multiply":
-          lastOperatorClicked = "*";
-          operatorWasClicked = true;
+          if (isNumNegative) {
+            expression += ")";
+            isNumNegative = false;
+            lastOperatorClicked = "*";
+            operatorWasClicked = true;
+          } else {
+            lastOperatorClicked = "*";
+            operatorWasClicked = true;
+          }
           break;
         case "add":
           if (isNumNegative) {
@@ -145,13 +188,21 @@ for (let i = 0; i < operators.length; i++) {
           }
           break;
         case "subtract":
-          if (operatorWasClicked) {
-            isNumNegative = true;
-            display.innerText = "-";
-          } else {
+          if (isNumNegative) {
+            expression += ")";
+            isNumNegative = false;
             lastOperatorClicked = "-";
             operatorWasClicked = true;
+          } else {
+            if (operatorWasClicked || expression === "") {
+              isNumNegative = true;
+              display.innerText = "-";
+            } else {
+              lastOperatorClicked = "-";
+              operatorWasClicked = true;
+            }
           }
+
           break;
         default:
           console.log("something was missed");
@@ -180,12 +231,18 @@ equals.addEventListener("click", () => {
     equalsWasPressed = true;
     isNumNegative = false;
     lastOperatorClicked = "";
+    if (result < 0) {
+      isNumNegative = true;
+    }
   } else {
     result = eval(expression);
     display.innerHTML = result;
     expression = result;
     equalsWasPressed = true;
     lastOperatorClicked = "";
+    if (result < 0) {
+      isNumNegative = true;
+    }
   }
 });
 
