@@ -136,6 +136,7 @@ for (let i = 0; i < operators.length; i++) {
             expression += ")";
             isNumNegative = false;
             operatorWasClicked = true;
+            lastOperatorClicked = "-";
           } else {
             if (operatorWasClicked) {
               isNumNegative = true;
@@ -144,6 +145,7 @@ for (let i = 0; i < operators.length; i++) {
               expression = result;
               equalsWasPressed: false;
               operatorWasClicked = true;
+              lastOperatorClicked = "-";
             }
           }
 
