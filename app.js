@@ -44,10 +44,17 @@ for (let i = 0; i < btn.length; i++) {
             operatorWasClicked = false;
           }
         } else {
-          expression = result + lastOperatorClicked + btn[i].innerText;
-          display.innerText = btn[i].innerText;
-          equalsWasPressed = false;
-          operatorWasClicked = false;
+          if (operatorWasClicked) {
+            expression = result + lastOperatorClicked + btn[i].innerText;
+            display.innerText = btn[i].innerText;
+            equalsWasPressed = false;
+            operatorWasClicked = false;
+          } else {
+            expression = btn[i].innerText;
+            display.innerText = btn[i].innerText;
+            equalsWasPressed = false;
+            operatorWasClicked = false;
+          }
         }
       } else {
         if (isNumNegative) {
@@ -64,8 +71,9 @@ for (let i = 0; i < btn.length; i++) {
             operatorWasClicked = false;
           }
         } else {
-          if (display.innerText == 0) {
+          if (display.innerText === "0") {
             display.innerText = "";
+            expression = "";
           }
           if (operatorWasClicked) {
             display.innerText = "";
@@ -126,10 +134,11 @@ for (let i = 0; i < operators.length; i++) {
             expression = result;
             equalsWasPressed: false;
             lastOperatorClicked = "+";
+            operatorWasClicked = true;
           }
-          expression = result;
-          equalsWasPressed: false;
-          lastOperatorClicked = "+";
+          // expression = result;
+          // equalsWasPressed: false;
+          // lastOperatorClicked = "+";
           break;
         case "subtract":
           if (isNumNegative) {
@@ -215,7 +224,11 @@ for (let i = 0; i < operators.length; i++) {
 
   // event listener for decimal
   decimal.addEventListener("click", () => {
-    console.log(display.innerHTML.charAt(display.innerText.length - 1));
+    if (equalsWasPressed) {
+      expression = "0.";
+      display.innerText = "0.";
+      equalsWasPressed = false;
+    }
     if (!display.innerHTML.includes(".")) {
       display.innerText += ".";
       expression += ".";
@@ -225,6 +238,9 @@ for (let i = 0; i < operators.length; i++) {
 
 //handle equals
 equals.addEventListener("click", () => {
+  if (display.innerText === "0") {
+    expression = 0;
+  }
   if (isNumNegative) {
     expression += ")";
     result = eval(expression);
