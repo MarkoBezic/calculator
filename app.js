@@ -136,9 +136,6 @@ for (let i = 0; i < operators.length; i++) {
             lastOperatorClicked = "+";
             operatorWasClicked = true;
           }
-          // expression = result;
-          // equalsWasPressed: false;
-          // lastOperatorClicked = "+";
           break;
         case "subtract":
           if (isNumNegative) {
@@ -221,20 +218,28 @@ for (let i = 0; i < operators.length; i++) {
       }
     }
   });
-
-  // event listener for decimal
-  decimal.addEventListener("click", () => {
-    if (equalsWasPressed) {
-      expression = "0.";
-      display.innerText = "0.";
-      equalsWasPressed = false;
-    }
-    if (!display.innerHTML.includes(".")) {
-      display.innerText += ".";
-      expression += ".";
-    }
-  });
 }
+
+//handle decimal button
+decimal.addEventListener("click", () => {
+  if (equalsWasPressed && operatorWasClicked) {
+    expression = result + lastOperatorClicked + "0.";
+    display.innerText = "0.";
+    equalsWasPressed = false;
+    operatorWasClicked = false;
+  } else if (operatorWasClicked) {
+    expression += lastOperatorClicked + "0.";
+    display.innerText = "0.";
+    operatorWasClicked = false;
+  } else if (equalsWasPressed) {
+    expression = "0.";
+    display.innerText = "0.";
+    equalsWasPressed = false;
+  } else if (!display.innerHTML.includes(".")) {
+    display.innerText += ".";
+    expression += ".";
+  }
+});
 
 //handle equals
 equals.addEventListener("click", () => {
