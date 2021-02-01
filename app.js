@@ -15,7 +15,7 @@ let equalsWasPressed = false;
 let operatorWasClicked = false;
 let isNumNegative = false;
 
-//clear button clears display and expression
+//clear button set everything back intial state
 clear.addEventListener("click", () => {
   display.innerText = 0;
   expression = "";
@@ -97,8 +97,6 @@ for (let i = 0; i < btn.length; i++) {
 //operator functionality
 for (let i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", () => {
-    //if equals was pressed is true pressing an operator will
-    //set equals was pressed to false
     if (equalsWasPressed) {
       switch (operators[i].id) {
         case "divide":
@@ -269,21 +267,22 @@ equals.addEventListener("click", () => {
   }
 });
 
-document.addEventListener("click", () => {
-  console.log(
-    "expression>>",
-    expression,
-    "=pressed>>",
-    equalsWasPressed,
-    "result>>",
-    result,
-    "lastOpClicked>>",
-    lastOperatorClicked,
-    "operatorClicked>>",
-    operatorWasClicked,
-    "negNum>>",
-    isNumNegative,
-    "equalsWasPressed>>",
-    equalsWasPressed
-  );
-});
+////logging logic
+// document.addEventListener("click", () => {
+//   console.log(
+//     "expression>>",
+//     expression,
+//     "=pressed>>",
+//     equalsWasPressed,
+//     "result>>",
+//     result,
+//     "lastOpClicked>>",
+//     lastOperatorClicked,
+//     "operatorClicked>>",
+//     operatorWasClicked,
+//     "negNum>>",
+//     isNumNegative,
+//     "equalsWasPressed>>",
+//     equalsWasPressed
+//   );
+// });
