@@ -268,21 +268,21 @@ equals.addEventListener("click", () => {
 });
 
 //logging logic
-document.addEventListener("click", () => {
-  console.log(
-    "expression>>",
-    expression,
-    "=pressed>>",
-    equalsWasPressed,
-    "result>>",
-    result,
-    "lastOpClicked>>",
-    lastOperatorClicked,
-    "operatorClicked>>",
-    operatorWasClicked,
-    "negNum>>",
-    isNumNegative,
-    "equalsWasPressed>>",
-    equalsWasPressed
-  );
-});
+// document.addEventListener("click", () => {
+//   console.log(
+//     "expression>>",
+//     expression,
+//     "=pressed>>",
+//     equalsWasPressed,
+//     "result>>",
+//     result,
+//     "lastOpClicked>>",
+//     lastOperatorClicked,
+//     "operatorClicked>>",
+//     operatorWasClicked,
+//     "negNum>>",
+//     isNumNegative,
+//     "equalsWasPressed>>",
+//     equalsWasPressed
+//   );
+// });
