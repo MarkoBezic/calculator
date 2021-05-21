@@ -25,7 +25,7 @@ clear.addEventListener("click", () => {
   isNumNegative = false;
 });
 
-//when pressing number keys they show up in the display and concatonates with expression bucket
+//when pressing number keys they show up in the display and concatonate with global 'expression' variable
 for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", () => {
     if (btn[i].innerText >= 0 && btn[i].innerText <= 9) {
@@ -106,7 +106,7 @@ for (let i = 0; i < operators.length; i++) {
             lastOperatorClicked = "/";
           } else {
             expression = result;
-            equalsWasPressed: false;
+            equalsWasPressed = false;
             lastOperatorClicked = "/";
             operatorWasClicked = true;
           }
@@ -118,7 +118,7 @@ for (let i = 0; i < operators.length; i++) {
             lastOperatorClicked = "+";
           }
           expression = result;
-          equalsWasPressed: false;
+          equalsWasPressed = false;
           lastOperatorClicked = "*";
           operatorWasClicked = true;
           break;
@@ -130,7 +130,7 @@ for (let i = 0; i < operators.length; i++) {
             lastOperatorClicked = "+";
           } else {
             expression = result;
-            equalsWasPressed: false;
+            equalsWasPressed = false;
             lastOperatorClicked = "+";
             operatorWasClicked = true;
           }
@@ -147,7 +147,7 @@ for (let i = 0; i < operators.length; i++) {
               display.innerText = "-";
             } else {
               expression = result;
-              equalsWasPressed: false;
+              equalsWasPressed = false;
               operatorWasClicked = true;
               lastOperatorClicked = "-";
             }
@@ -267,22 +267,22 @@ equals.addEventListener("click", () => {
   }
 });
 
-////logging logic
-// document.addEventListener("click", () => {
-//   console.log(
-//     "expression>>",
-//     expression,
-//     "=pressed>>",
-//     equalsWasPressed,
-//     "result>>",
-//     result,
-//     "lastOpClicked>>",
-//     lastOperatorClicked,
-//     "operatorClicked>>",
-//     operatorWasClicked,
-//     "negNum>>",
-//     isNumNegative,
-//     "equalsWasPressed>>",
-//     equalsWasPressed
-//   );
-// });
+//logging logic
+document.addEventListener("click", () => {
+  console.log(
+    "expression>>",
+    expression,
+    "=pressed>>",
+    equalsWasPressed,
+    "result>>",
+    result,
+    "lastOpClicked>>",
+    lastOperatorClicked,
+    "operatorClicked>>",
+    operatorWasClicked,
+    "negNum>>",
+    isNumNegative,
+    "equalsWasPressed>>",
+    equalsWasPressed
+  );
+});
